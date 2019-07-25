@@ -204,7 +204,9 @@
                 (func (and func-name (find-symbol func-name :gtk-demo))))
            (if func
                (funcall func)
-               (format t "~%No function.~%")))))
+               (if (gtk-tree-view-row-expanded tree-view path)
+                   (gtk-tree-view-collapse-row tree-view path)
+                   (gtk-tree-view-expand-row tree-view path NIL))))))
     (gtk-tree-selection-set-mode selection :browse)
     (g-signal-connect selection "changed"
        (lambda (tree-selection)
