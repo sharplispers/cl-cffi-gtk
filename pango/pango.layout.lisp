@@ -199,7 +199,7 @@
 ;;; pango_layout_new ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("pango_layout_new" pango-layout-new) (g-object pango-layout)
+(defcfun ("pango_layout_new" pango-layout-new) (g-object pango-layout :already-referenced T)
  #+cl-cffi-gtk-documentation
  "@version{2013-12-8}
   @argument[context]{a @class{pango-context} object}
