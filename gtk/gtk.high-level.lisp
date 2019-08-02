@@ -35,8 +35,9 @@
                      (gtk-call-aborted-condition c)))))
 
 (defun call-within-main-loop-and-wait (fn)
-  (let ((lock (bt:make-lock))
-        (cv (bt:make-condition-variable))
+  (let ((lock (bt:make-lock "within-main-loop-and-wait-lock"))
+        (cv (bt:make-condition-variable
+             :name "within-main-loop-and-wait-condition"))
         error
         result)
     (bt:with-lock-held (lock)
