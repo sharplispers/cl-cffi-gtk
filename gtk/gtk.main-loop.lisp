@@ -212,6 +212,12 @@
   @see-function{%gtk-init-check}"
   (%gtk-init-check (foreign-alloc :int :initial-element 1)
                    (foreign-alloc :pointer :initial-element (foreign-alloc :string :initial-contents '("/usr/bin/sbcl"))))
+  #+(and sbcl (not win32))
+  (let ((handler (find-symbol (string '#:sigpipe-handler) (string '#:sb-unix)))
+        (enable (find-symbol (string '#:enable-interrupt) (string '#:sb-unix)))
+        (signal (find-symbol (string '#:sigpipe) (string '#:sb-unix))))
+    (when handler
+      (funcall enable (symbol-value signal) (symbol-function handler))))
   #+nil(with-foreign-objects ((argc :int)
                          (argv '(:pointer :string) 1))
     (setf (mem-ref argc :int) 0
