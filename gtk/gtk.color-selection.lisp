@@ -640,7 +640,7 @@
             (for i from 0 below (mem-ref n-colors :int))
             (for color-ptr =
                  (inc-pointer colors-ar
-                              (* i (foreign-type-size 'gdk-color-cstruct))))
+                              (* i (foreign-type-size 'gdk::gdk-color-cstruct))))
             (for color = (convert-from-foreign color-ptr
                                                '(g-boxed-foreign gdk-color)))
             (collect color)
